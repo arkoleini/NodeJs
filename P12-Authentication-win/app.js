@@ -1,3 +1,4 @@
+require('dotenv').config();  // Add this line at the top
 const path = require('path');
 
 const express = require('express');
@@ -14,7 +15,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 const csrdProtection = csrf();  //-- define CSRF---
 
-const cloudUri='mongodb+srv://arkoleini:Test123456789@cluster0.0b8zxrp.mongodb.net/shop?retryWrites=true&w=majority';
+const cloudUri = process.env.CLOUD_URI;
 const localUri='mongodb://localhost:27017/shop'
 
 const fs = require('fs');
