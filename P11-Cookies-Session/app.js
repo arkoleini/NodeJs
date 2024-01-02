@@ -37,7 +37,7 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect('mongodb+srv://arkoleini:ARK9016ark@cluster0.0b8zxrp.mongodb.net/shop?retryWrites=true&w=majority')
+  .connect(process.env.CLOUD_URI)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
