@@ -13,7 +13,7 @@ const logger = require('./util/logger'); // assuming logger.js is in the util di
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
-const csrdProtection = csrf();  //-- define CSRF---
+const csrfProtection = csrf();  //-- define CSRF---
 
 const cloudUri=process.env.CLOUD_URI;
 const localUri='mongodb://localhost:27017/shop'
@@ -45,14 +45,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
-    secret: 'my secret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store
   })
 );
 
-app.use(csrdProtection);  //----add CSRF to middleware---
+app.use(csrfProtection);  //----add CSRF to middleware---
 
 //--add user manually from session into req to pipulating issue------
 app.use((req, res, next) => {
