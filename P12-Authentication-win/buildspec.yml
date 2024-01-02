@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing source NPM dependencies...
+      - cp -r AWS/P12-Authentication-win/*
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Node.js app
+      # Add other build commands here
+
+artifacts:
+  files:
+    - '**/*'
+  name: BuildOutput # This is the name of the output artifact

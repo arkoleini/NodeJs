@@ -1,0 +1,14 @@
+version: 0.0
+os: windows
+files:
+  - source: P12-Authentication-win/
+    destination: C:\AWS\P13-Authentication
+hooks:
+  AfterInstall:
+    - location: scripts\after_install.ps1
+      timeout: 300
+      runas: Administrator
+  ApplicationStart:
+    - location: scripts\application_start.ps1
+      timeout: 300
+      runas: Administrator
