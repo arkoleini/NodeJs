@@ -1,4 +1,3 @@
-```html
 <h2 style="color: #2913cf;">Analysis of Node.js Route Files</h2>
 
 <h3 style="color: #c05dde;">File: <code>auth.js</code></h3>
@@ -58,4 +57,3 @@
   </li>
   <li><span style="color: #2913cf;">Export</span>: Exports the router to be used in the main application.</li>
 </ul>
-```
