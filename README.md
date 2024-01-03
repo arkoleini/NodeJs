@@ -1,82 +1,61 @@
-# Node.js Application Documentation - `app.js`
+```html
+<h2 style="color: #2913cf;">Analysis of Node.js Route Files</h2>
 
-## Overview
+<h3 style="color: #c05dde;">File: <code>auth.js</code></h3>
 
-The `app.js` file serves as the main entry point for a Node.js web application built with Express.js. It orchestrates server setup, middleware integration, route handling, and database connectivity. The application leverages MongoDB for data storage and incorporates features such as session management, CSRF protection, and custom logging.
+<ul>
+  <li><span style="color: #2913cf;">Purpose</span>: Handles authentication-related routes in the application.</li>
+  <li><span style="color: #2913cf;">Dependencies</span>: Uses <code>express</code> for routing and <code>authController</code> for handling authentication logic.</li>
+  <li>
+    <span style="color: #2913cf;">Routes</span>:
+    <ul>
+      <li><span style="color: #3c98c9;">GET /login</span>: Displays the login page.</li>
+      <li><span style="color: #3c98c9;">GET /signup</span>: Displays the signup page.</li>
+      <li><span style="color: #3c98c9;">POST /login</span>: Processes login data submitted from the login form.</li>
+      <li><span style="color: #3c98c9;">POST /signup</span>: Processes signup data submitted from the signup form.</li>
+      <li><span style="color: #3c98c9;">POST /logout</span>: Handles user logout functionality.</li>
+    </ul>
+  </li>
+  <li><span style="color: #2913cf;">Export</span>: Exports the configured router for use in the main application.</li>
+</ul>
 
-## Dependencies
+<h3 style="color: #c05dde;">File: <code>admin.js</code></h3>
 
-- **dotenv**: Loads environment variables from a `.env` file into `process.env`.
-- **path**: Provides utilities for file and directory path operations.
-- **express**: Node.js web application framework.
-- **body-parser**: Middleware for parsing incoming request bodies.
-- **mongoose**: Object modeling tool for MongoDB.
-- **express-session**: Session middleware for Express.
-- **connect-mongodb-session**: MongoDB session store for Express sessions.
-- **csurf**: Middleware for CSRF token generation and validation.
-- **cors**: Middleware for enabling CORS (Cross-Origin Resource Sharing).
-- **logger**: Custom logging utility (assumed located in `./util/logger`).
+<ul>
+  <li><span style="color: #2913cf;">Purpose</span>: Manages routes related to the admin section of the application.</li>
+  <li><span style="color: #2913cf;">Dependencies</span>: Uses <code>express</code> for routing, <code>isauth</code> middleware for authentication, and <code>adminController</code> for admin-specific logic.</li>
+  <li>
+    <span style="color: #2913cf;">Routes</span>:
+    <ul>
+      <li><span style="color: #3c98c9;">GET /add-product</span>: Displays the form to add a new product (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">GET /products</span>: Lists all products for the admin (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">POST /add-product</span>: Processes the addition of a new product (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">GET /edit-product/:productId</span>: Displays the form to edit a product (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">POST /edit-product</span>: Processes the update of a product (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">POST /delete-product</span>: Handles the deletion of a product (protected by <code>isauth</code>).</li>
+    </ul>
+  </li>
+  <li><span style="color: #2913cf;">Export</span>: Exports the router for integration into the main application.</li>
+</ul>
 
-## Functionality
+<h3 style="color: #c05dde;">File: <code>shop.js</code></h3>
 
-### Environment Variables and Directory Setup
-
-- Initializes environment variables using `dotenv`.
-- Checks and creates a `Drivelog` directory if it does not exist.
-
-### Express App Initialization
-
-- Creates an Express application instance.
-- Configures MongoDB store for session handling.
-- Sets EJS as the view engine and specifies the views directory.
-
-### Middleware Configuration
-
-- Enables CORS for cross-origin requests.
-- Configures body-parser for URL-encoded data.
-- Serves static files from the `public` directory.
-- Implements session middleware with MongoDB storage.
-- Integrates CSRF protection.
-- Populates `req.user` with user data from session if available.
-- Adds `isAuthenticated` and `csrfToken` to response locals for use in views.
-
-### Routes
-
-- Sets up application routes for `admin`, `shop`, and `auth` functionalities.
-- Includes a catch-all route for handling 404 (Not Found) errors.
-
-### Database Connection and Server Launch
-
-- Establishes a connection to MongoDB using Mongoose.
-- Starts the Express server on port 3000 after successful database connection.
-- Logs server startup and error events.
-
-## Security Features
-
-- **Session Management**: Utilizes `express-session` with MongoDB for robust session data storage.
-- **CSRF Protection**: Employs `csurf` middleware for CSRF token management.
-- **CORS**: Implements CORS policy via `cors` middleware.
-
-## Error Handling
-
-- Custom `logger` utility for consistent error logging.
-- Middleware for capturing and handling 404 errors.
-
-## Observations and Recommendations
-
-- **Database URI**: Uses a cloud-based MongoDB URI from environment variables, with a fallback to a local MongoDB setup.
-- **Session Secret**: Retrieves the session secret from environment variables for enhanced security.
-- **Static File Serving**: Delivers static assets from the `public` directory.
-- **Error Management**: Robust error handling with dedicated logging and error controller.
-- **CSRF Tokens**: Ensures CSRF token inclusion in each response for secure form submissions.
-- **User Session Management**: Seamlessly integrates user data into request objects for personalized user experiences.
-- **Logging**: Implements custom logging for activity and error tracking.
-- **Code Structure**: Exhibits clear and modular code organization, segregating routes, models, and controllers.
-
-## Potential Improvements
-
-- **Environment-Specific Configurations**: Differentiate between development and production settings for database connections, logging levels, etc.
-- **Advanced Logging Techniques**: Adopt more sophisticated logging solutions like rotating logs or external monitoring service integrations.
-- **Security Upgrades**: Introduce additional security measures such as HTTPS, input validation, and rate limiting.
-- **Testing Framework**: Implement unit and integration tests for improved reliability and maintainability.
-- **API Documentation**: If the application provides an API, consider documenting it using tools like Swagger for better clarity and usability.
+<ul>
+  <li><span style="color: #2913cf;">Purpose</span>: Handles routes related to the main shopping functionality.</li>
+  <li><span style="color: #2913cf;">Dependencies</span>: Uses <code>express</code> for routing, <code>isauth</code> middleware for authentication, and <code>shopController</code> for shop-related logic.</li>
+  <li>
+    <span style="color: #2913cf;">Routes</span>:
+    <ul>
+      <li><span style="color: #3c98c9;">GET /</span>: Displays the main index or landing page of the shop (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">GET /products</span>: Shows all products available in the shop (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">GET /products/:productId</span>: Displays a single product's details (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">GET /cart</span>: Shows the user's shopping cart (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">POST /cart</span>: Handles adding a product to the shopping cart (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">POST /cart-delete-item</span>: Manages the removal of a product from the cart (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">POST /create-order</span>: Processes the creation of an order from the cart items (protected by <code>isauth</code>).</li>
+      <li><span style="color: #3c98c9;">GET /orders</span>: Displays all orders made by the user (protected by <code>isauth</code>).</li>
+    </ul>
+  </li>
+  <li><span style="color: #2913cf;">Export</span>: Exports the router to be used in the main application.</li>
+</ul>
+```
